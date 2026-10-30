@@ -16,7 +16,7 @@ function(Map, which, ...) {
       x <- sin(long)*sin(lat)
       
     
-      rgl::lines3d(x,y,z, ...)
+      rgl::segments3d(x,y,z, ...)
     }
   }
 

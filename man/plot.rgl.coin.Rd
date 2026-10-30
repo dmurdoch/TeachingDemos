@@ -78,12 +78,12 @@ flip.rgl.coin()
 flip.rgl.coin(1)
 flip.rgl.coin(2)
 
-rgl.clear()
+rgl::clear3d()
 
 # two-headed coin
 rgl.coin(tails=coin.faces$qh)
 
-rgl.clear()
+rgl::clear3d()
 
 # letters instead of pictures
 rgl.coin(heads=coin.faces$H, tails=coin.faces$T)
@@ -91,7 +91,7 @@ rgl.coin(heads=coin.faces$H, tails=coin.faces$T)
 # biased flip
 flip.rgl.coin( sample(2,1, prob=c(0.65, 0.35) ) )
 
-rgl.clear()
+rgl::clear3d()
 
 rgl.die()
 roll.rgl.die()
