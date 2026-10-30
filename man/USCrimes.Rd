@@ -58,7 +58,7 @@ The third dimension is the variable:
   }
 }
 \source{
-\url{http://www.ucrdatatool.gov/}
+Originally: "https://ucrdatatool.gov/"", but that site does not work any more.  Likely source for similar data: "https://www.fbi.gov/how-we-can-help-you/more-fbi-services-and-information/ucr/publications"
 }
 %\references{
 %%  ~~ possibly secondary sources and usages ~~
@@ -68,7 +68,7 @@ data(USCrimes)
 ## maybe str(USCrimes)
 
 # plot time series/sparkline for each state
-if(require(maptools)) {
+if(require(spData) && interactive()) {
 	data(state.vbm)
 	plot(state.vbm)
 

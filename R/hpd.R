@@ -38,7 +38,7 @@ emp.hpd <- function(x, conf=0.95, lower, upper){
 	  return(range(x))
 	}
 	x <- sort(x)
-	xx <- tail(x, n) - head(x, n)
+	xx <- utils::tail(x, nn) - utils::head(x, nn)
 	nnn <- which.min(xx)
 	return( c( x[ nnn ], x[ n-nn+nnn ] ) )
 }

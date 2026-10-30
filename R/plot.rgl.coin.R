@@ -6,6 +6,7 @@ rgl.coin <- function(x, col='black', heads=x[[1]],
 
   rgl::view3d(0,0)
   savecolor <- rgl::material3d(col = "white")
+
   for(i in 0:39) {
     rgl::triangles3d(c(.5, cos(pi/20*i)/2+0.5, cos(pi/20*(i+1))/2+0.5),
                   c(.5, sin(pi/20*i)/2+0.5, sin(pi/20*(i+1))/2+0.5),
@@ -20,8 +21,9 @@ rgl.coin <- function(x, col='black', heads=x[[1]],
                c(0,0.03,0.03,0)
               )
   }
+ 
   rgl::material3d(savecolor)
-  
+
   tmp <- rep( 1:nrow(heads), each=2 )
   tmp <- c(tmp[-1],1)
 

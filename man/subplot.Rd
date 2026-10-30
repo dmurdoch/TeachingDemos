@@ -101,7 +101,7 @@ subplot( hist(rt(100,3)), c(12,16), c(57,59), pars=list(lwd=3,ask=FALSE) )
 ### but loading the packages required does not work well in testing.
 
 # augment a map
-if( interactive() && require(maptools) ){
+if( interactive() && require(spData) ){
 	plot(state.vbm,fg=NULL)
 	tmp <- cbind( state.vbm$center_x, state.vbm$center_y )
 	for( i in 1:50 ){

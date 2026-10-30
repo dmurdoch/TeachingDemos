@@ -1,16 +1,14 @@
 Package: TeachingDemos
 Title: Demonstrations for Teaching and Learning
-Version: 2.10
+Version: 2.14
 Author: Greg Snow
 Description: Demonstration functions that can be used in a classroom to demonstrate statistical concepts, or on your own to better understand the concepts or the programming.
 Maintainer: Greg Snow <538280@gmail.com>
 License: Artistic-2.0
-Date: 2016-02-08
-Suggests: tkrplot, lattice, MASS, rgl, tcltk, tcltk2, png, ggplot2,
-        logspline, maptools, R2wd, manipulate
+Date: 2025-05-09
+Suggests: tkrplot, lattice, MASS, rgl, tcltk, tcltk2, png, ggplot2, logspline, spData, sf, shiny
+Enhances: manipulate, R2wd
 LazyData: true
 KeepSource: true
-NeedsCompilation: no
-Packaged: 2016-02-12 01:53:42 UTC; Family
-Repository: CRAN
-Date/Publication: 2016-02-12 07:40:49
+URL: https://github.com/glsnow/TeachingDemos
+
