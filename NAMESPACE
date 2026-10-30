@@ -28,7 +28,11 @@
        SnowsPenultimateNormalityTest,vis.test,vt.qqnorm,vt.normhist,
        vt.scatterpermute,vt.tspermute,vt.residpermute,vt.residsim,
        SnowsCorrectlySizedButOtherwiseUselessTestOfAnything,petals,cal,
-       TkBuildDist,TkBuildDist2)
+       TkBuildDist,TkBuildDist2,ShinyCorExamp,ShinyCorExamp2,
+       ShinyHistogramBuild,ShinyStemBuild,ShinyBoxplotBuild,ShinyHistogramExamp,
+       ShinyPutPoints,ShinyNormal,ShinySamplingDistProp,ShinySamplingDistMean,
+       ShinyCLTExamp,ShinyConfIntExamp,ShinyPowerExamp,ShinyPvalueNormSim,
+       ShinyPvalueBinomSim)
 
 
   importFrom("grDevices", "chull", "col2rgb", "colors", "dev.copy",
