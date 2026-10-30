@@ -1,33 +1,33 @@
 ShinyPowerExamp <- function(n = 1, sd = 1, diff = 0, alpha = 0.05, xmin = -2, xmax = 4) {
-  if (!require(shiny)) {
+  if (!requireNamespace("shiny", quietly = TRUE)) {
     stop("The shiny package is required")
   }
-  runApp(list(
-    ui = shinyUI(fluidPage(
+  shiny::runApp(list(
+    ui = shiny::shinyUI(shiny::fluidPage(
 
-      titlePanel("Power Example"),
+      shiny::titlePanel("Power Example"),
 
-      fluidRow(
-        plotOutput("pPlot", "100%", height = "500px")
+      shiny::fluidRow(
+        shiny::plotOutput("pPlot", "100%", height = "500px")
       ),
 
-      fluidRow(
-        column(3, numericInput('n', 'Sample Size', value = n, min = 1, max = 10000, step = 1)),
-        column(3, numericInput('sd', 'Standard Deviation', value = sd, min = 0.1, max = 10, step = 0.1)),
-        column(3, numericInput('diff', 'Difference', value = diff, min = -10, max = 10, step = 0.1)),
-        column(3, numericInput('alpha', 'alpha', value = alpha, min = 0, max = 1, step = 0.01))
+      shiny::fluidRow(
+        shiny::column(3, shiny::numericInput('n', 'Sample Size', value = n, min = 1, max = 10000, step = 1)),
+        shiny::column(3, shiny::numericInput('sd', 'Standard Deviation', value = sd, min = 0.1, max = 10, step = 0.1)),
+        shiny::column(3, shiny::numericInput('diff', 'Difference', value = diff, min = -10, max = 10, step = 0.1)),
+        shiny::column(3, shiny::numericInput('alpha', 'alpha', value = alpha, min = 0, max = 1, step = 0.01))
       ),
 
-      fluidRow(
-        column(3, numericInput('xmin', 'Minimum x', value = xmin)),
-        column(3, numericInput('xmax', 'Maximum x', value = xmax)),
-        column(6, ' ')
+      shiny::fluidRow(
+        shiny::column(3, shiny::numericInput('xmin', 'Minimum x', value = xmin)),
+        shiny::column(3, shiny::numericInput('xmax', 'Maximum x', value = xmax)),
+        shiny::column(6, ' ')
       )
 
     )),
-    server = shinyServer(function(input, output) {
+    server = shiny::shinyServer(function(input, output) {
 
-      output$pPlot <- renderPlot({
+      output$pPlot <- shiny::renderPlot({
         power.examp(n = input$n, stdev = input$sd, diff = input$diff,
                     alpha = input$alpha, xmin = input$xmin, xmax = input$xmax
         )

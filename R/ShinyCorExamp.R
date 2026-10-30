@@ -1,16 +1,16 @@
 ShinyCorExamp <- function(n=100, seed=1, initial_cor=0) {
-  if (!require(shiny)) {
+  if (!requireNamespace("shiny", quietly = TRUE)) {
     stop("The shiny package is required")
   }
-  runApp(list(
-    ui = shinyUI(fluidPage(
+  shiny::runApp(list(
+    ui = shiny::shinyUI(shiny::fluidPage(
       # Application title
-      titlePanel("Correlation Example"),
+      shiny::titlePanel("Correlation Example"),
 
       # Sidebar with a slider input for the number of bins
-      sidebarLayout(
-        sidebarPanel(
-          sliderInput(
+      shiny::sidebarLayout(
+        shiny::sidebarPanel(
+          shiny::sliderInput(
             "r",
             "Correlation:",
             min = -1,
@@ -18,26 +18,26 @@ ShinyCorExamp <- function(n=100, seed=1, initial_cor=0) {
             step = 0.01,
             value = initial_cor
           ),
-          numericInput(
+          shiny::numericInput(
             'n',
             "Number of Observations:",
             n,
             min = 10,
             step = 10
           ),
-          numericInput('seed', "Seed:", seed, min = 1, max = 255)
+          shiny::numericInput('seed', "Seed:", seed, min = 1, max = 255)
         ),
 
         # Show a plot of the generated distribution
-        mainPanel(
-          plotOutput("corPlot")
+        shiny::mainPanel(
+          shiny::plotOutput("corPlot")
         )
       )
     )),
-    server = shinyServer(function(input, output) {
+    server = shiny::shinyServer(function(input, output) {
       n <- 100
 
-      output$corPlot <- renderPlot(
+      output$corPlot <- shiny::renderPlot(
         {
           set.seed(input$seed)
           x <- scale(matrix(rnorm(2 * input$n, 0, 1), ncol = 2, byrow = TRUE))

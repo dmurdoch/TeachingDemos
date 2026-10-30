@@ -40,7 +40,7 @@
              "getGraphicsEvent", "nclass.Sturges", "png", "recordPlot",
              "replayPlot", "rgb", "xy.coords")
   importFrom("graphics", "Axis", "abline", "arrows", "axis", "barplot",
-             "box", "curve", "frame", "grconvertX", "grconvertY", "hist",
+             "box", "boxplot", "curve", "frame", "grconvertX", "grconvertY", "hist",
              "image", "layout", "legend", "lines", "locator", "mtext",
              "pairs", "par", "persp", "plot", "plot.new", "plot.window",
              "points", "polygon", "rect", "rug", "segments", "strheight",
@@ -51,7 +51,7 @@
              "loess.control", "median", "optimize", "pbinom", "pchisq",
              "pnorm", "predict", "pt", "qchisq", "qgeom", "qnorm",
              "qqline", "qqnorm", "qqplot", "qt", "quantile", "rbinom",
-             "resid", "rnorm", "runif", "scatter.smooth", "sd",
+             "resid", "rgamma", "rnorm", "runif", "scatter.smooth", "sd",
              "splinefun", "terms", "var")
   importFrom("utils", "capture.output", "file_test", "flush.console",
              "head", "str", "tail", "write.table")

@@ -1,22 +1,22 @@
 ShinyStemBuild <- function(step = 1) {
-  if (!require(shiny)) {
+  if (!requireNamespace("shiny", quietly = TRUE)) {
     stop("The shiny package is required")
   }
-  runApp(list(
-    ui = shinyUI(fluidPage(
-      titlePanel("Stem and Leaf Construction"),
-      sidebarLayout(
-        sidebarPanel(
-          numericInput("step", "Step:", min = 1, max = 24, step = 1, value = step, width = '25%')
+  shiny::runApp(list(
+    ui = shiny::shinyUI(shiny::fluidPage(
+      shiny::titlePanel("Stem and Leaf Construction"),
+      shiny::sidebarLayout(
+        shiny::sidebarPanel(
+          shiny::numericInput("step", "Step:", min = 1, max = 24, step = 1, value = step, width = '25%')
         ),
-        mainPanel(
-          plotOutput("stemPlot", height = '800px')
+        shiny::mainPanel(
+          shiny::plotOutput("stemPlot", height = '800px')
         )
       )
     )),
-    server = shinyServer(function(input, output) {
+    server = shiny::shinyServer(function(input, output) {
 
-      output$stemPlot <- renderPlot({
+      output$stemPlot <- shiny::renderPlot({
 
         pnts <- c(0, 0, 0, 0, 1:10, 15, 20, 25, 30, 40, 50, 60, 70, 70, 0)
         plts <- c(
@@ -51,17 +51,17 @@ ShinyStemBuild <- function(step = 1) {
         y <- 1 - (((0:69) %/% 9) / 10 + 1 / 20)
         tmptxt <- if (input$step > 1) {
           if (input$step == 24) {
-            sort(round(precip))
+            sort(round(datasets::precip))
           } else {
-            format(round(precip))
+            format(round(datasets::precip))
           }
         } else {
-          format(precip)
+          format(datasets::precip)
         }
         text(x, y, tmptxt, col = ifelse((1:70) > pnts[input$step], 'black', 'grey'),
              cex = 2, adj = 0, family = 'mono')
         if (input$step == 3 | input$step == 4) {
-          text(x, y, format(floor(round(precip) / 10)), col = 'red', cex = 2, adj = 0,
+          text(x, y, format(floor(round(datasets::precip) / 10)), col = 'red', cex = 2, adj = 0,
                family = 'mono')
         }
         title(main = 'Average Annual Precipitation for U.S. Cities')

@@ -1,29 +1,29 @@
 ShinyBoxplotBuild <- function(step = 1) {
-  if (!require(shiny)) {
+  if (!requireNamespace("shiny", quietly = TRUE)) {
     stop("The shiny package is required")
   }
-  runApp(list(
-    ui = shinyUI(fluidPage(
-      titlePanel("BoxPlot Construction"),
-      sidebarLayout(
-        sidebarPanel(
-          numericInput("step", "Step:", min = 1, max = 13, step = 1, value = step, width = '25%')
+  shiny::runApp(list(
+    ui = shiny::shinyUI(shiny::fluidPage(
+      shiny::titlePanel("BoxPlot Construction"),
+      shiny::sidebarLayout(
+        shiny::sidebarPanel(
+          shiny::numericInput("step", "Step:", min = 1, max = 13, step = 1, value = step, width = '25%')
         ),
-        mainPanel(
-          plotOutput("bpPlot", height = '300px')
+        shiny::mainPanel(
+          shiny::plotOutput("bpPlot", height = '300px')
         )
       )
     )),
-    server = shinyServer(function(input, output) {
+    server = shiny::shinyServer(function(input, output) {
 
-      med <- median(precip)
-      q1 <- median(precip[precip < med])
-      q3 <- median(precip[precip > med])
+      med <- median(datasets::precip)
+      q1 <- median(datasets::precip[datasets::precip < med])
+      q3 <- median(datasets::precip[datasets::precip > med])
       iqr <- q3 - q1
       lf <- q1 - 1.5 * iqr
       uf <- q3 + 1.5 * iqr
-      mn <- min(precip[precip >= lf])
-      mx <- max(precip[precip <= uf])
+      mn <- min(datasets::precip[datasets::precip >= lf])
+      mx <- max(datasets::precip[datasets::precip <= uf])
 
       titles <- c("Set up Axis",
                   "Sort Data",
@@ -40,13 +40,13 @@ ShinyBoxplotBuild <- function(step = 1) {
                   ""
       )
 
-      output$bpPlot <- renderPlot({
+      output$bpPlot <- shiny::renderPlot({
 
         plot.new()
         plot.window(xlim = c(0, 80), ylim = c(-1, 2))
         axis(1)
 
-        if (input$step > 1 & input$step < 13) rug(precip)
+        if (input$step > 1 & input$step < 13) rug(datasets::precip)
         if (input$step > 2 & input$step < 13) abline(v = med, col = '#00ff0088')
         if (input$step > 3 & input$step < 13) abline(v = c(q1, q3), col = '#0000ff88')
         if (input$step > 5 & input$step < 13) abline(v = lf, col = '#ff000088')
@@ -63,7 +63,7 @@ ShinyBoxplotBuild <- function(step = 1) {
           segments(x0 = c(mn, mx), x1 = c(q1, q3), y0 = 0.5, lty = 2)
         }
         if (input$step > 11) {
-          points(precip[precip < lf | precip > uf], rep(0.5, 5))
+          points(datasets::precip[datasets::precip < lf | datasets::precip > uf], rep(0.5, 5))
         }
 
         title(main = titles[input$step])

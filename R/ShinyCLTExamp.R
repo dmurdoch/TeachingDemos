@@ -1,24 +1,24 @@
 ShinyCLTExamp <- function(n = 1) {
-  if (!require(shiny)) {
+  if (!requireNamespace("shiny", quietly = TRUE)) {
     stop("The shiny package is required")
   }
-  runApp(list(
-    ui = shinyUI(fluidPage(
+  shiny::runApp(list(
+    ui = shiny::shinyUI(shiny::fluidPage(
 
-      titlePanel("Central Limit Theorem Demo"),
+      shiny::titlePanel("Central Limit Theorem Demo"),
 
-      fluidRow(
-        plotOutput("cltPlot", "100%", height = "500px")
+      shiny::fluidRow(
+        shiny::plotOutput("cltPlot", "100%", height = "500px")
       ),
 
-      fluidRow(
-        column(2, numericInput('n', 'Sample Size', value = n)),
-        column(10, ' ')
+      shiny::fluidRow(
+        shiny::column(2, shiny::numericInput('n', 'Sample Size', value = n)),
+        shiny::column(10, ' ')
       )
 
     )),
-    server = shinyServer(function(input, output, session) {
-      output$cltPlot <- renderPlot({
+    server = shiny::shinyServer(function(input, output, session) {
+      output$cltPlot <- shiny::renderPlot({
         clt.examp(input$n)
       })
 

@@ -1,38 +1,38 @@
 ShinySamplingDistProp <- function() {
-  if (!require(shiny)) {
+  if (!requireNamespace("shiny", quietly = TRUE)) {
     stop("The shiny package is required")
   }
   xbar <- numeric(0)
   x <- list()
 
-  runApp(list(
-    ui = shinyUI(fluidPage(
+  shiny::runApp(list(
+    ui = shiny::shinyUI(shiny::fluidPage(
 
-      titlePanel("Sampling Distribution for Proportion"),
+      shiny::titlePanel("Sampling Distribution for Proportion"),
 
-      fluidRow(column(12, '')),
+      shiny::fluidRow(shiny::column(12, '')),
 
-      fluidRow(
-        plotOutput("sdPlot", "80%", height = "750px")
+      shiny::fluidRow(
+        shiny::plotOutput("sdPlot", "80%", height = "750px")
       ),
 
-      fluidRow(
-        column(2, numericInput('p', 'True Proportion', value = 0.5))
+      shiny::fluidRow(
+        shiny::column(2, shiny::numericInput('p', 'True Proportion', value = 0.5))
       ),
-      fluidRow(
-        column(2, numericInput('n', 'Sample Size', value = 20)),
-        column(1, ' '),
-        column(2, actionButton('samp1', 'Sample Once')),
-        column(2, actionButton('samp5', 'Sample 5')),
-        column(2, actionButton('samp100', "Sample 100")),
-        column(2, actionButton('samp1000', 'Sample 1,000')),
-        column(1, ' ')
+      shiny::fluidRow(
+        shiny::column(2, shiny::numericInput('n', 'Sample Size', value = 20)),
+        shiny::column(1, ' '),
+        shiny::column(2, shiny::actionButton('samp1', 'Sample Once')),
+        shiny::column(2, shiny::actionButton('samp5', 'Sample 5')),
+        shiny::column(2, shiny::actionButton('samp100', "Sample 100")),
+        shiny::column(2, shiny::actionButton('samp1000', 'Sample 1,000')),
+        shiny::column(1, ' ')
       )
 
     )),
-    server = shinyServer(function(input, output, session) {
+    server = shiny::shinyServer(function(input, output, session) {
 
-      output$sdPlot <- renderPlot({
+      output$sdPlot <- shiny::renderPlot({
         par(mar = c(4, 4, 2, 1) + 0.1, xpd = FALSE)
         layout(matrix(1:6, ncol = 2), widths = c(3, 1))
         barplot(c(1 - input$p, input$p), names = c('No', 'Yes'), main = '', xlab = 'Population')
@@ -76,35 +76,35 @@ ShinySamplingDistProp <- function() {
 
       })
 
-      observe({
-        if (input$samp1 > 0) isolate({
+      shiny::observe({
+        if (input$samp1 > 0) shiny::isolate({
           x <<- list(rbinom(input$n, 1, input$p))
           xbar <<- c(xbar, mean(x[[1]]))
         })
       })
 
-      observe({
-        if (input$samp5 > 0) isolate({
+      shiny::observe({
+        if (input$samp5 > 0) shiny::isolate({
           x <<- replicate(5, rbinom(input$n, 1, input$p), simplify = FALSE)
           xbar <<- c(xbar, sapply(x, mean))
         })
       })
 
-      observe({
-        if (input$samp100 > 0) isolate({
+      shiny::observe({
+        if (input$samp100 > 0) shiny::isolate({
           x <<- replicate(100, rbinom(input$n, 1, input$p), simplify = FALSE)
           xbar <<- c(xbar, sapply(x, mean))
         })
       })
 
-      observe({
-        if (input$samp1000 > 0) isolate({
+      shiny::observe({
+        if (input$samp1000 > 0) shiny::isolate({
           x <<- replicate(1000, rbinom(input$n, 1, input$p), simplify = FALSE)
           xbar <<- c(xbar, sapply(x, mean))
         })
       })
 
-      observe({
+      shiny::observe({
         tmp <- input$n
         tmp2 <- input$p
         x <<- list()
